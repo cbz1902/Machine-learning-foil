@@ -14,7 +14,7 @@
 %       J. Mooney has made no warranty or representation that the
 %       operation of this software will be error-free, and he is
 %       under no obligation to provide any services, by way of
-%       maintenance, update, or otherwise.
+%       maintenance, update, or otherwise.  
 %
 %    3. Any user of such software agrees to indemnify and hold
 %       harmless Raymond J. Mooney and The University of Texas from
@@ -22,7 +22,7 @@
 %	software, or arising out of any accident, injury, or damage
 %	whatsoever, and from all costs, counsel fees and liabilities
 %       incurred in or about any such claim, action, or proceeding
-%       brought thereon.
+%       brought thereon. 
 %
 %    4. Users are requested, but not required, to inform Raymond J.
 %	Mooney of any noteworthy uses of this software.
@@ -49,7 +49,7 @@
 /*                foil(Predicate), foil_time(Predicate)           */
 /*                                                                */
 /*  parameter   : foil_predicates/1, foil_use_negations/1,        */
-/*	          foil_det_lit_bound/1, foil_cwa/1                */
+/* 	          foil_det_lit_bound/1, foil_cwa/1                */
 /*                                                                */
 /******************************************************************/
 /* The version presented here is somewhat simplified in that it   */
@@ -57,7 +57,7 @@
 /* recursive call must contain vars not found in the head of a    */
 /* clause, and may not introduce any unbound vars), and it does   */
 /* not incorporate encoding length restrictions to handle noisy   */
-/* data. There is also no post-processing of clauses to simplify  */
+/* data. There is also no post-processing of clauses to simplify  */ 
 /* learned definitions, although this would be relatively easy to */
 /* add.                                                           */
 /*                                                                */
@@ -66,21 +66,15 @@
 /*                                                                */
 /* The background knowledge for predicate induction is represented*/
 /* as "existential" predicates. By existential it is meant that   */
-/* the definitions there must be fully constructive to avoid      */
+/* the definitions there must be fully constructive to avoid      */ 
 /* instantiation errors when running FOIL. The input data file    */
 /* needs to be preceeded by the following header (see also the    */
 /* example files):                                                */
 /*                                                                */
-/*	foil_predicates(<FunctorList>).                           */
-/*	foil_cwa(<Boolean>).                                      */
-/*  File:    mi_foil.pl
-    Author:  Carlos BenÃƒÂ¬tez,,,
-    Created: May 19 2019
-    Purpose:
-*/
-
-/*	foil_use_negations(<Boolean>).                            */
-/*	foil_det_lit_bound(<Integer>).                            */
+/* 	foil_predicates(<FunctorList>).                           */
+/* 	foil_cwa(<Boolean>).                                      */
+/* 	foil_use_negations(<Boolean>).                            */
+/* 	foil_det_lit_bound(<Integer>).                            */
 /*                                                                */
 /* were foil_predicates(<FunctorList>) declares all predicates    */
 /* occuring in FunctorList, which are used in the example facts.  */
@@ -93,21 +87,21 @@
 /* or false. And foil_det_lit_bound(<Integer>) is used as depth   */
 /* limit on the search for determinate literals.                  */
 /******************************************************************/
-% TH: Sat Jan 15 16:05:29 1994  Corrected a variable binding bug
+% TH: Sat Jan 15 16:05:29 1994  Corrected a variable binding bug 
 %                               in generate_possible_extensions/2
 %                               Modified output slightly and made
 %                               foil Quintus independent.
 %     Fri Apr  8 20:04:14 1994  Added switch for cwa/'explicite
-%				negative examples'
-%     Thu May 26 17:41:30 1994  Modified choose_tie_clause, so that
+% 				negative examples' 
+%     Thu May 26 17:41:30 1994  Modified choose_tie_clause, so that 
 %				'foil_4.pl' will be processed
-%				correctly.
+%				correctly. 
 %
 % TH: Note, it seems that the member example used by Quinlan 90
 %     'foil_3.pl' is erroneous. This implementation cannot produce the
 %     correct member definition from it. However, if the example is
 %     reformulated (as in 'foil_4.pl'), the correct member definition
-%     can be learned.
+%     can be learned. 
 
 % If you use Quintus-Prolog you can use these libs, but than you
 % need to comment out the predicates at the end of the file.
@@ -126,27 +120,27 @@
 time(X) :-
 	X is cputime.
 
-log(X,Y) :-
+log(X,Y) :- 
 	Y is log(X).
 
 
 
-% Modificaciones de Miguel A. Gutiï¿½rrez Naranjo
+% Modificaciones de Miguel A. Gutiérrez Naranjo
 % 2 de Marzo de 2008
 
 % Modificaciones en best_next_clause
 % Modificacaciones en get_example
 % Modificado compute_gain
 
-% Modificaciones de Miguel A. Gutiï¿½rrez Naranjo
+% Modificaciones de Miguel A. Gutiérrez Naranjo
 % 2 de Marzo de 2008
 % Modificaciones en info_value
 % Nuevo predicado informa/6
-% Nuevo parï¿½metro: verbosity
-% - verbosity(0) Devuelve sï¿½lo la ganancia de informaciï¿½n
-% - verbosity(1) Devuelve el nï¿½mero de ejemplos positivos y negativos
+% Nuevo parámetro: verbosity
+% - verbosity(0) Devuelve sólo la ganancia de información
+% - verbosity(1) Devuelve el número de ejemplos positivos y negativos
 %   cubiertos
-% - verbosity(2) Devuelve tambiï¿½n la lista de ejemplos positivos y
+% - verbosity(2) Devuelve también la lista de ejemplos positivos y
 %   negativos cubiertos.
 % Modificaciones en foil_loop
 % Modificaciones en foil/1
@@ -169,9 +163,9 @@ foil_time(Name/Arity) :-
 	!,
 	foil_time(Predicate).
 foil_time(Goal) :-
-	time(T0),
+	time(T0), 
 	foil(Goal),
-	time(T1),
+	time(T1), 
 	T is T1 - T0,
 	write('Run Time = '), write(T), write(' sec.'), nl.
 
@@ -193,10 +187,10 @@ foil(Name/Arity) :-
 	foil(Predicate).
 foil(Goal) :-
 	foil(Goal,Clauses),
-	nl, write('Definiciï¿½n encontrada:'), nl,
+	nl, write('Definición encontrada:'), nl, 
 	portray_clauses(Clauses).
 
-portray_clauses([]) :-
+portray_clauses([]) :- 
 	nl.
 portray_clauses([H|T]):-
 	portray_clause(H),
@@ -204,7 +198,7 @@ portray_clauses([H|T]):-
 
 % Clauses is the set of clauses defining Goal found by FOIL. Negative
 % examples are provided by either explicitly or by closed world
-% assumption on the Herbrand base, depending in the switch foil_cwa/1.
+% assumption on the Herbrand base, depending in the switch foil_cwa/1. 
 foil(Goal, Clauses) :-
 	get_examples(Goal, Positives, Negatives),
 	foil_loop(Positives, Goal, Negatives, [], Clauses).
@@ -217,10 +211,10 @@ get_examples(Goal, Pos, Neg) :-
 	findall(Goal, clause(Goal,true), Pos),
 	( clause(foil_cwa(true),true) ->
 	      create_negatives(Pos, Neg)
-% He comentado la siguiente instruccion y la he sustituido por otra
-%	; findall(Goal, clause(not(Goal),true), Neg)
-	; findall(Goal, clause(Goal,fail), Neg)
-	).
+% He comentado la siguiente instruccion y la he sustituido por otra	
+%	; findall(Goal, clause(not(Goal),true), Neg) 
+	; findall(Goal, clause(Goal,fail), Neg) 
+	).	      
 
 /******************************************************************/
 /*                                                                */
@@ -236,7 +230,7 @@ get_examples(Goal, Pos, Neg) :-
 /*                                                                */
 /******************************************************************/
 /* This predicate corresponds to the "outer loop" in Quinlan 90.  */
-/* Each iteration of the outer loop attempts to construct a       */
+/* Each iteration of the outer loop attempts to construct a       */ 
 /* clause, printsit and determines the remaining set of positive  */
 /* examples for the next iteration. If no positive examples are   */
 /* left, the outer loop terminates, and the set of clauses        */
@@ -245,9 +239,9 @@ get_examples(Goal, Pos, Neg) :-
 foil_loop(Pos, Goal, Neg, Clauses0, Clauses) :-
 	( Pos = [] ->
 	      Clauses = Clauses0
-	; nl, write('Ejemplos positivos no cubiertos:'), nl,
-	  write(Pos), nl,
-	  nl, write('Aï¿½adiendo una regla ...'), nl, nl,
+	; nl, write('Ejemplos positivos no cubiertos:'), nl, 
+	  write(Pos), nl, 
+	  nl, write('Añadiendo una regla ...'), nl, nl,
 	  extend_clause_loop(Neg, Pos, (Goal :- true), Clause),
 	  nl, write('Regla encontrada:'), nl,
 	  portray_clause(Clause),
@@ -270,9 +264,9 @@ foil_loop(Pos, Goal, Neg, Clauses0, Clauses) :-
 /*                                                                */
 /******************************************************************/
 /* This predicate corresponds to the "inner loop" in Quinlan 90   */
-/* and in a general to specific manner. At each iteration a       */
-/* premises is determined and added to SEED, until it covers no   */
-/* negative examples, or until the information gain does not      */
+/* and in a general to specific manner. At each iteration a       */ 
+/* premises is determined and added to SEED, until it covers no   */  
+/* negative examples, or until the information gain does not      */ 
 /* improve. If the latter happens, determinate literals may be    */
 /* added to the clause (see Quinlan 91), depending on the value   */
 /* of the switch foil_det_lit_bound/1. This switch determines the */
@@ -301,7 +295,7 @@ extend_clause_loop(Nxs0, Pxs0, Clause0, Clause) :-
 		      write('WARNING -- clause covers negatives:'), nl,
 		      write(Nxs1), nl,
 		      Clause = Clause1
-		; write('Adding determinate literals: '), write(Ds), nl,
+		; write('Adding determinate literals: '), write(Ds), nl, 
 		  add_literals(Ds, Clause0, Clause2),
 		  covered_examples(Clause2, Nxs0, Nxs1),
 		  extend_clause_loop(Nxs1, Pxs0, Clause2, Clause)
@@ -311,10 +305,10 @@ extend_clause_loop(Nxs0, Pxs0, Clause0, Clause) :-
 	    extend_clause_loop(Nxs1, Pxs1, Clause1, Clause)
 	  )
 	).
-
+	
 % Compute the information matrix for the set of positive and negative
 % tuples which result from applying Clause to the examples Pxs and
-% NXs.
+% NXs. 
 
 
 info_value(Clause, Pxs, Nxs, Value,Ptuples,P,Ntuples,N) :-
@@ -323,7 +317,7 @@ info_value(Clause, Pxs, Nxs, Value,Ptuples,P,Ntuples,N) :-
 	length(Ptuples, P),
 	length(Ntuples,N),
 	( P =:= 0 ->
-		  Value = 0
+	      	  Value = 0
 	; Temp is P / (P + N),
 	  log(Temp, Temp1),
 	  Value is Temp1 * -1.442695
@@ -335,36 +329,36 @@ informa(1,T,_,Clause,_,P,_,N):-
 	write('Regla: '),
 	\+ \+ (numbervars(Clause,0,_),print(Clause)),
 	nl,
-	write('Nï¿½mero de ejemplos positivos: '), write(P),nl,
-	write('Nï¿½mero de ejemplos negativos: '), write(N),nl,
-	write('Nï¿½mero de pos. cubiertos en la clï¿½usula ampliada: '),
+	write('Número de ejemplos positivos: '), write(P),nl,
+	write('Número de ejemplos negativos: '), write(N),nl,
+	write('Número de pos. cubiertos en la cláusula ampliada: '),
 	write(T),nl.
 informa(2,T,Retained,Clause,Ptuples,P,Ntuples,N):-
 	write('Regla: '),
 	\+ \+ (numbervars(Clause,0,_),print(Clause)),
 	nl,
-	write('Nï¿½mero de ejemplos positivos: '), write(P),nl,
+	write('Número de ejemplos positivos: '), write(P),nl,
 	write('Ejemplos positivos: '), write(Ptuples),nl,
-	write('Nï¿½mero de ejemplos negativos: '), write(N),nl,
-	write('Ejemplos negativos: '), write(Ntuples),nl,
-	write('Nï¿½mero de pos. cubiertos en la clï¿½usula ampliada: '),
+       	write('Número de ejemplos negativos: '), write(N),nl,
+       	write('Ejemplos negativos: '), write(Ntuples),nl,
+	write('Número de pos. cubiertos en la cláusula ampliada: '),
 	write(T),nl,
-	write('Positivos cubiertos en la clï¿½usula ampliada: '),
+	write('Positivos cubiertos en la cláusula ampliada: '),
 	write(Retained),nl.
 
 
 
 % Determines the clause which is an extension of Clause by a single
 % literal and provides maximum information gain over the original
-% clause.
+% clause. 
 best_next_clause([], _, _, _, _, _, Clause, Clause).
 best_next_clause([L|Ls], Nxs, Pxs, Clause, Info, Gain0, Best0, Best) :-
 	add_literal(L, Clause, Best1),
 	compute_gain(Nxs, Pxs, Info, Best1, Gain1),
-%% TH: For debugging purposes
-%      He descomentado las siguientes 3 lï¿½neas
-	\+ \+ ( numbervars(Best1,0,_),
-		write('Ganancia: '), write(Gain1), write('	Regla: '),
+%% TH: For debugging purposes 
+%      He descomentado las siguientes 3 líneas
+	\+ \+ ( numbervars(Best1,0,_), 
+		write('Ganancia: '), write(Gain1), write('	Regla: '), 
 		print(Best1), nl,nl ),
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	( Gain1 > Gain0 ->
@@ -387,24 +381,24 @@ choose_tie_clause((A1:-B1), (A2:-B2), C) :-
 %     variable tie ignore the refinement and take the first clause.
 %     In this formulation neither the membertest example 'foil_3.pl'
 %     nor 'foil_4.pl' will be processed correctly !
-%	( N2 < N1 ->
-%	      C = (A2:-B2)
-%	;  C = (A1:-B1)
+%	( N2 < N1 -> 
+%	      C = (A2:-B2)  
+%	;  C = (A1:-B1) 
 %	).
 % TH: In this formulation, which means: in case of a variable tie use
 %     the refinement and ignore the previous possible clauses,
 %     the membertest example 'foil_4.pl' will be processed correctly,
 %     but 'foil_3.pl' will not terminate !
-	( N2 =< N1 ->
-	      C = (A2:-B2)
-	;  C = (A1:-B1)
+	( N2 =< N1 -> 
+	      C = (A2:-B2)  
+	;  C = (A1:-B1) 
 	).
 % TH: Obviously, this implies that chosing arbitrarily a clause in the
 %     case of a variable tie is the wrong solution. It would be
 %     better to specialize those clauses further and to decide one
 %     step later, which branch to follow. Unfortunately, Quinlan 90
 %     seems to give no answer to this problem !
-
+	      
 % For a set of positive and negative examples Pxs and Nxs, compute the
 % information gain of Clause over a clause which produces a split
 % having Info, as it's "information value" on these examples.
@@ -445,16 +439,16 @@ add_literals(Ls, Clause0, Clause) :-
 	  add_literal(L, Clause0, Clause1),
 	  add_literals(Ls1, Clause1, Clause)
 	).
-
+	
 % Construct a list representing the set of variables in Term.
-variables_in(A, Vs) :-
+variables_in(A, Vs) :- 
 	variables_in(A, [], Vs).
-
+	
 variables_in(A, V0, V) :-
-	var(A), !,
+	var(A), !, 
 	ord_add_element(V0, A, V).
 variables_in(A, V0, V) :-
-	ground(A), !, V = V0.
+	ground(A), !, V = V0. 
 variables_in(Term, V0, V) :-
 	functor(Term, _, N),
 	variables_in_args(N, Term, V0, V).
@@ -495,7 +489,7 @@ generate_possible_extensions((A :- B), Extensions) :-
 	variables_in((A :- B), OldVars),
         %% TH: This differs from the original implementation, which
 	%%     was not correct, since findall usually loses the
-	%%     variable bindings.
+	%%     variable bindings.  
 	findall((OldVars :- L), candidate_literal(A, OldVars, L), Extension1),
 	rmhead(Extension1,OldVars,Extensions).
 
@@ -506,7 +500,7 @@ candidate_literal(Goal, OldVars, Lit) :-
 	member(Pred/Arity, Preds),
 	functor(L, Pred, Arity),
 	recursion_check(Goal, Pred, Arity, RecursionFlag),
-	MaxNewVars is Arity - 1,
+	MaxNewVars is Arity - 1, 
 	possible_new_vars(RecursionFlag, MaxNewVars, NewVars),
 	length(NewVars, NewVarPositions),
 	OldVarPositions is Arity - NewVarPositions,
@@ -515,9 +509,9 @@ candidate_literal(Goal, OldVars, Lit) :-
 	possible_unification(NewVars, NewVarSeq, _),
 	subseq(VarSeq, OldVarSeq, NewVarSeq),
 	bind_vars(L, VarSeq, 1),
-	( Lit = L
-	; foil_use_negations(true),
-	  Lit = (\+ L)
+	( Lit = L 
+	; foil_use_negations(true), 
+	  Lit = (\+ L) 
 	).
 
 recursion_check(G, Pred, Arity, Flag) :-
@@ -559,7 +553,7 @@ bind_vars(Lit, Vars, Index) :-
 	( Vars = [] ->
 	      true
 	; Vars = [H|T],
-	  arg(Index, Lit, H),
+ 	  arg(Index, Lit, H),
 	  Index1 is Index + 1,
 	  bind_vars(Lit, T, Index1)
 	).
@@ -590,7 +584,7 @@ create_negatives([P|Ps], Negatives) :-
 	      (  arguments_are_members(Template, N, Universe),
 	         \+ member(Template, [P|Ps]) ),
 	      Negatives).
-
+	      
 arguments_are_members(Term, N, Universe) :-
 	( N > 0 ->
 	      arg(N, Term, Arg),
@@ -599,19 +593,19 @@ arguments_are_members(Term, N, Universe) :-
 	      arguments_are_members(Term, N1, Universe)
 	; true
 	).
-
+	
 %---------------------------------------------------------------------------
 % Determinate Literals
 
 % determinate(+Lit, +Vars, +PTuples, +NTuples) -- holds if Lit is a
 % determinate literal wrt the bindings for Vars as represented in
-% PTuples and NTuples.
+% PTuples and NTuples. 
 determinate(L, Vars, PTuples, NTuples) :-
 	binds_new_var(L, Vars),
 	determ_cover(PTuples, L, Vars),
 	determ_partial_cover(NTuples, L, Vars).
 
-binds_new_var((\+ _),_) :-
+binds_new_var((\+ _),_) :- 
 	!, fail.
 binds_new_var(L, Vars) :-
 	variables_in(L, LVars),
@@ -643,10 +637,10 @@ determinate_literals(Cands, Clause, Pxs, Nxs, DLits) :-
 	determinate_literals1(Cands, Body, Vars, PTuples, NTuples, DLits).
 
 determinate_literals1(Cands, Body, Vars, PTuples, NTuples, DLits) :-
-	bagof(X, ( member(X, Cands),
+	bagof(X, ( member(X, Cands), 
 	           determinate(X, Vars, PTuples, NTuples),
 		   \+( (numbervars(Vars,0,_), ante_memberchk(X,Body)) )
-		 ),
+		 ), 
 	      DLits).
 
 ante_memberchk(A,A) :- !.
@@ -658,7 +652,7 @@ ante_memberchk(A, (B,C)) :-
 
 % reachable_antes(+Bound, +H, +Cands, -Antes) -- Antes is the list of
 % literals from Cands which can be "connected" to H by some chain of
-% variables of length <= Bound.
+% variables of length <= Bound. 
 reachable_antes(Bound, H, Cands, Antes) :-
 	variables_in(H, Vs),
 	expand_by_var_chain(Bound, Cands, Vs, [], Antes).
@@ -752,7 +746,7 @@ free_of_var(N, Term, Variable) :-
 %   subsets and their complements together, but can also be used to
 %   interleave two lists in all possible ways.  Note that if S1 is a
 %   subset of S2, it will be generated *before S2 as a SubSequence and
-%   *after it as a Complement.
+%   *after it as a Complement.  
 subseq([], [], []).
 subseq([Head|Tail], Sbsq, [Head|Cmpl]) :-
 	subseq(Tail, Sbsq, Cmpl).

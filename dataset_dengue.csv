@@ -1,0 +1,51 @@
+fiebre;erupciones;sangreados;nauseas;dificultad_respiratoria;dolor_muscular;dolor_cabeza;dolor_ojos;enfermedad
+media;no;no;no;no;no;medio;si;otro
+media;no;no;si;no;no;bajo;no;otro
+alta;si;no;si;no;si;intenso;si;dengue_clasico
+baja;no;no;no;no;no;bajo;no;otro
+baja;no;no;no;no;no;bajo;no;otro
+media;si;si;si;no;si;intenso;si;dengue_hemorragico
+alta;si;no;si;si;si;intenso;si;dengue_clasico
+alta;si;no;si;si;si;intenso;si;dengue_clasico
+baja ;no;no;no;no;no;bajo;no;otro
+alta;si;no;si;no;si;intenso;si;dengue_clasico
+alta;si;si;si;no;si;intenso;si;dengue_hemorragico
+alta;si;si;si;si;si;intenso;si;dengue_hemorragico
+media;no;no;no;no;no;bajo;no;otro
+baja ;no;no;si;si;no;bajo;no;otro
+alta;si;si;si;no;si;intenso;si;dengue_hemorragico
+media;si;si;si;si;si;medio;si;dengue_hemorragico
+alta;si;no;si;no;si;intenso;si;dengue_clasico
+alta;si;no;si;si;si;medio;si;dengue_clasico
+alta ;si;si;si;no;si;intenso;si;dengue_hemorragico
+alta;si;no;si;no;si;intenso;si;dengue_clasico
+media ;si;no;si;si;si;medio;si;dengue_clasico
+baja;no;no;no;no;no;medio;si;otro
+media;no;no;no;no;no;medio;si;otro
+baja;no;no;no;no;no;medio;si;otro
+alta;si;no;si;si;si;medio;si;dengue_clasico
+media;no;no;no;no;no;medio;si;otro
+alta;si;si;si;no;si;intenso;si;dengue_hemorragico
+media ;si;no;si;si;si;intenso;si;dengue_clasico
+alta;si;no;si;si;si;medio;si;dengue_clasico
+alta;si;no;si;si;si;intenso;si;dengue_clasico
+alta;si;no;si;si;si;intenso;si;dengue_clasico
+baja;no;no;no;no;no;medio;si;otro
+baja;no;no;no;no;no;bajo;no;otro
+baja;no;no;no;no;no;medio;si;otro
+baja;no;no;no;no;no;medio;si;otro
+alta;si;no;si;si;si;medio;si;dengue_clasico
+alta ;si;si;si;no;si;intenso;si;dengue_hemorragico
+media;si;no;si;si;si;medio;si;dengue_clasico
+media;si;si;si;no;si;intenso;si;dengue_hemorragico
+media;no;no;no;no;no;medio;si;otro
+alta;si;no;si;si;si;intenso;si;dengue_clasico
+alta;si;si;si;no;si;intenso;si;dengue_hemorragico
+baja;no;no;no;no;no;bajo;no;otro
+alta;si;no;si;si;si;intenso;si;dengue_clasico
+alta;si;si;si;no;si;intenso;si;dengue_hemorragico
+alta;si;no;si;si;si;intenso;si;dengue_clasico
+media;no;no;no;no;no;medio;si;otro
+media;si;no;si;si;si;intenso;si;dengue_clasico
+alta;si;si;si;no;si;intenso;si;dengue_hemorragico
+baja;no;no;no;no;no;bajo;no;otro
